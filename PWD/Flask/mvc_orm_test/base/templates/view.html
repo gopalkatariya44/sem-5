@@ -8,8 +8,10 @@
           integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 </head>
 <body style="padding: 50px">
-<h1>Categorys</h1>
-
+<h1>Categorys List</h1>
+<a href="/">
+<button type="button" class="btn btn-link">Home page</button>
+</a>
 <table class="table">
     <thead>
     <tr>
@@ -26,10 +28,10 @@
             <td>{{ loop.index }}</td>
             <td>{{ row['category_name'] }}</td>
             <td>{{ row['category_description'] }}</td>
-            <td><a href="/admin/update_page/?id={{ row['category_id'] }}">
-                <button type="button" class="btn btn-outline-success">Edit</button>
+            <td><a href="/admin/edit_category/?id={{ row['category_id'] }}">
+                <button type="button" class="btn btn-outline-success">Update</button>
             </a>
-                <a href="/admin/delete/?id={{ row['category_id'] }}">
+                <a href="/admin/delete_category/?id={{ row['category_id'] }}">
                     <button type="button" class="btn btn-outline-danger">Delete</button>
                 </a>
             </td>

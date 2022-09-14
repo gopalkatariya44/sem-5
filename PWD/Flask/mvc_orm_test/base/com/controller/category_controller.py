@@ -7,16 +7,16 @@ from base.com.dao.category_dao import CategoryDAO
 @app.route('/home')
 @app.route('/')
 def home():
-    return render_template('hello.html')
+    return render_template('home.html')
 
 
-@app.route('/add_category')
-def add():
+@app.route('/admin/load_category')
+def admin_load_category():
     return render_template('insert.html')
 
 
-@app.route('/admin/insert_data', methods=['POST'])
-def add_category():
+@app.route('/admin/insert_category', methods=['POST'])
+def admin_insert_category():
     name = request.form.get('categoryName')
     description = request.form.get('categoryDescription')
 
@@ -27,40 +27,40 @@ def add_category():
     vo.category_description = description
 
     dao.insert_category(vo)
-    return redirect('/')
+    return redirect('/admin/view_category')
 
 
-@app.route('/admin/view_data')
-def view():
+@app.route('/admin/view_category')
+def admin_view_category():
     dao = CategoryDAO()
-    list = dao.view_category()
-    print("--->", list)
-    return render_template("view.html", list=list)
+    view_list = dao.view_category()
+    # print("--->", list)
+    return render_template("view.html", list=view_list)
 
 
-@app.route('/admin/delete/')
-def delete():
+@app.route('/admin/delete_category/')
+def admin_delete_category():
     category_id = request.args.get('id')
     vo = CategoryVO()
     dao = CategoryDAO()
     vo.category_id = category_id
     dao.delete_category(vo)
-    return redirect('/admin/view_data')
+    return redirect('/admin/view_category')
 
 
-@app.route('/admin/update_page/')
-def update_page():
+@app.route('/admin/edit_category/')
+def admin_edit_category():
     category_id = request.args.get('id')
     vo = CategoryVO()
     dao = CategoryDAO()
     vo.category_id = category_id
-    list = dao.edit_category(vo)
+    edit_list = dao.edit_category(vo)
     # print("-----", list[0]['category_name'])
-    return render_template('update.html', list=list)
+    return render_template('update.html', list=edit_list)
 
 
-@app.route('/admin/update/', methods=['POST'])
-def update():
+@app.route('/admin/update_category/', methods=['POST'])
+def admin_update_category():
     category_id = request.form.get('id')
     name = request.form.get('categoryName')
     description = request.form.get('categoryDescription')
@@ -73,4 +73,4 @@ def update():
     vo.category_description = description
 
     dao.update_category(vo)
-    return redirect('/admin/view_data')
+    return redirect('/admin/view_category')
