@@ -28,9 +28,9 @@ def register():
     cursor = connection.cursor()
     try:
         query = "INSERT INTO user VALUES ({},{},{},{})".format(request.form.get('firstname'),
-                                                                   request.form.get('lastname'),
-                                                                   request.form.get('username'),
-                                                                   request.form.get('password'))
+                                                               request.form.get('lastname'),
+                                                               request.form.get('username'),
+                                                               request.form.get('password'))
         cursor.execute(query)
         connection.commit()
     finally:

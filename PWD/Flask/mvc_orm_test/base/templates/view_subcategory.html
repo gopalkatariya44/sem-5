@@ -8,16 +8,16 @@
           integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 </head>
 <body style="padding: 50px">
-<h1>Categorys List</h1>
+<h1>Subcategorys List</h1>
 <a href="/">
 <button type="button" class="btn btn-link">Home page</button>
 </a>
 <table class="table">
     <thead>
     <tr>
-        <th scope="col">ID</th>
-        <th scope="col">NAME</th>
-        <th scope="col">DESCRIPTION</th>
+        <th scope="col">Subcategory name</th>
+        <th scope="col">Subcategory description</th>
+        <th scope="col">Category name</th>
         <th scope="col">Actions</th>
     </tr>
     </thead>
@@ -25,13 +25,13 @@
     {% for row in list %}
         <tr>
 
-            <td>{{ loop.index }}</td>
-            <td>{{ row['category_name'] }}</td>
-            <td>{{ row['category_description'] }}</td>
-            <td><a href="/admin/edit_category/?id={{ row['category_id'] }}">
+            <td>{{ row[0]['subcategory_name'] }}</td>
+            <td>{{ row[0]['subcategory_description'] }}</td>
+            <td>{{ row[1]['category_name'] }}</td>
+            <td><a href="/admin/edit_subcategory/?id={{ row[0]['subcategory_id'] }}">
                 <button type="button" class="btn btn-outline-success">Update</button>
             </a>
-                <a href="/admin/delete_category/?id={{ row['category_id'] }}">
+                <a href="/admin/delete_subcategory/?id={{ row[0]['subcategory_id'] }}">
                     <button type="button" class="btn btn-outline-danger">Delete</button>
                 </a>
             </td>

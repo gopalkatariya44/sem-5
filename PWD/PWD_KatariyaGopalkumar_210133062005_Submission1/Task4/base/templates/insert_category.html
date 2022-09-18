@@ -8,30 +8,23 @@
           integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 </head>
 <body style="padding: 100px">
-<h1>Update Category</h1>
+<h1>Add Category</h1>
 <a href="/">
     <button type="button" class="btn btn-link">Home page</button>
 </a>
 <br>
-<form action="/admin/update_category" method="POST">
-    <input value="{{ list[0]['category_id'] }}" type="hidden" name="id">
+<form action="/admin/insert_category" method="POST">
+
     <div class="mb-4 col-md-5">
         <label for="exampleInputName" class="form-label">Name</label>
-        <input value="{{ list[0]['category_name'] }}" name="categoryName" type="text" class="form-control"
-               id="exampleInputName"
+        <input name="categoryName" type="text" class="form-control" id="exampleInputName"
                aria-describedby="nameHelp" required>
     </div>
-    {#    <div class="mb-5 col-md-5">#}
-    {#        <label for="exampleInputDescription" class="form-label">Description</label>#}
-    {#        <input value="{{ list[0]['category_description'] }}" name="categoryDescription" type="text" class="form-control"#}
-    {#               id="exampleInputDescription"#}
-    {#               aria-describedby="descriptionHelp" required>#}
-    {#    </div>#}
     <div class="mb-4 col-md-5">
         <label for="exampleInputName" class="form-label">Description</label>
         <textarea name="categoryDescription" class="form-control" placeholder="Leave a description here"
                   id="floatingTextarea2"
-                  style="height: 100px">{{ list[0]['category_description'] }}</textarea>
+                  style="height: 100px"></textarea>
     </div>
     <div class="d-grid gap-2 col-md-5">
         <button class="btn btn-primary" type="submit">Submit</button>
