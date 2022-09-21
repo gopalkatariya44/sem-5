@@ -9,14 +9,14 @@ from base.com.dao.subcategory_dao import SubCategoryDAO
 def admin_load_subcategory():
     dao = CategoryDAO()
     category_list = dao.view_category()
-    return render_template('insert_subcategory.html', list=category_list)
+    return render_template('base/subcategory/insert_subcategory.html', list=category_list)
 
 
 @app.route('/admin/insert_subcategory', methods=['POST'])
 def admin_insert_subcategory():
-    category_id = request.form.get('categoryId')
     name = request.form.get('subCategoryName')
     description = request.form.get('subCategoryDescription')
+    category_id = request.form.get('categoryId')
 
     subcategory_vo = SubCategoryVO()
     subcategory_dao = SubCategoryDAO()
@@ -33,8 +33,7 @@ def admin_insert_subcategory():
 def admin_view_subcategory():
     dao = SubCategoryDAO()
     view_list = dao.view_subcategory()
-    print("--->", view_list)
-    return render_template("view_subcategory.html", list=view_list)
+    return render_template("base/subcategory/view_subcategory.html", list=view_list)
 
 
 @app.route('/admin/delete_subcategory/')
@@ -55,16 +54,15 @@ def admin_edit_subcategory():
     subcategory_dao = SubCategoryDAO()
     subcategory_vo.subcategory_id = subcategory_id
     edit_list = subcategory_dao.edit_subcategory(subcategory_vo)
-    # print("-----", list[0]['category_name'])
-    return render_template('update_subcategory.html', list=edit_list, category_list=category_list)
+    return render_template('base/subcategory/update_subcategory.html', list=edit_list, category_list=category_list)
 
 
 @app.route('/admin/update_subcategory/', methods=['POST'])
 def admin_update_subcategory():
     subcategory_id = request.form.get('id')
+    category_id = request.form.get('categoryId')
     name = request.form.get('subCategoryName')
     description = request.form.get('subCategoryDescription')
-    category_id = request.form.get('categoryId')
     subcategory_vo = SubCategoryVO()
     subcategory_dao = SubCategoryDAO()
 
