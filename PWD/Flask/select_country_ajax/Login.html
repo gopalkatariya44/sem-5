@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+
+    <script>
+        function validateLogin() {
+
+            var loginUsername = document.getElementById("loginUsername");
+            var loginPassword = document.getElementById("loginPassword");
+
+            var ajax = new XMLHttpRequest();
+
+            ajax.onreadystatechange = function () {
+
+                if (ajax.readyState === 4) {
+
+                    alert(ajax.responseText);
+                }
+            };
+            ajax.open("get", "/validate_login?loginUsername=" + loginUsername.value + "&loginPassword=" + loginPassword.value, true);
+            ajax.send();
+        }
+
+    </script>
+
+</head>
+<body>
+
+<form action="#" method="post">
+
+    User Name :
+    <input type="email" id="loginUsername" name="loginUsername"/><br><br>
+
+    Password :
+    <input type="password" id="loginPassword" name="loginPassword"/><br><br>
+
+    <input type="button" value="SUBMIT" onclick="validateLogin()"/><br>
+
+    {% with message = get_flashed_messages() %}
+
+        {% if message %}
+
+            <div style="border:none;color: red">{{ message[0] }}</div>
+
+        {% endif %}
+
+    {% endwith %}
+</form>
+
+</body>
+</html>

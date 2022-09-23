@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+
+    <script>
+        function validateLogin() {
+
+            var countryId = document.getElementById("countryId");
+            var stateId = document.getElementById("stateId");
+            var ajax = new XMLHttpRequest();
+            stateId.innerHTML = ""
+            ajax.onreadystatechange = function () {
+                if (ajax.readyState === 4) {
+                    console.log("country", countryId);
+                    console.log(ajax.responseText);
+                    var jsn = JSON.parse(ajax.responseText);
+                    console.log("json", jsn);
+
+                    for (var i = 0; i < jsn.length; i++) {
+                        var opt = document.createElement('option');
+                        opt.value = jsn[i].stateId;
+                        opt.text = jsn[i].stateName;
+                        stateId.options.add(opt);
+                    }
+                }
+            };
+            ajax.open("get", "/validate_login?countryId=" + countryId.value, true);
+            ajax.send();
+        }
+
+    </script>
+
+</head>
+
+<body>
+
+    <form action="#" method="post">
+
+        <div class="mb-4 col-md-5">
+            <label for="exampleInputName" class="form-label">Country</label>
+            <div class="input-group mb-3">
+                <select name="countryId" class="form-select" id="countryId" onchange="validateLogin()">
+                    <option selected>Choose...</option>
+                    <option value="1">INDIA</option>
+                    <option value="2">USA</option>
+
+                </select>
+            </div>
+        </div>
+        <div class="mb-4 col-md-5">
+            <label for="exampleInputName" class="form-label">State</label>
+            <div class="input-group mb-3">
+                <select id="stateId">
+                    <option selected disabled>Select State</option>
+                </select>
+            </div>
+        </div>
+
+
+
+
+        {% with message = get_flashed_messages() %}
+
+        {% if message %}
+
+        <div style="border:none;color: red">{{ message[0] }}</div>
+
+        {% endif %}
+
+        {% endwith %}
+    </form>
+
+</body>
+
+</html>
