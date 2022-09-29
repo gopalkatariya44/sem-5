@@ -1,14 +1,6 @@
-from calendar import c
 from flask import Flask, render_template, request, jsonify
-from pytz import country_names
 
 app = Flask(__name__)
-
-
-# country_list = {
-#     'india': ['guj', 'panjab', 'jammu'],
-#     'USA': ['cupartono', 'lossanjalis', 'continatal']
-# }
 
 
 @app.route('/')
@@ -21,16 +13,6 @@ def validate_login():
     country_id = request.args.get('countryId')
     print(country_id)
 
-    # country_list = [
-    #     {
-    #         "country_id": 1,
-    #         "state_list": ['Guj']
-    #     },
-    #     {
-    #         "country_id": 2,
-    #         "state_list": ['Cup', 'Loss']
-    #     },
-    # ]
     country = []
     if country_id == "1":
         country_list = [
@@ -43,7 +25,6 @@ def validate_login():
                 "stateName": 'Kol',
             },
         ]
-        print("1 ----------> call")
         country.extend(country_list)
     if country_id == "2":
         country_list = [
